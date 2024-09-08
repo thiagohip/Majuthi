@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&display=swap');
+
+*{
+    font-family: "Karantina", system-ui;
+    font-size: 1.2rem;
+}
+
+body{
+    background-color: #0055CC;
+}
+
+.site{
+    *{
+        color: white;
+    }
+    
+}
+
+.navbar-brand{
+    color: #0055CC;
+    font-size: 2.2rem;
+}
+
+.navbar {
+    background-color: white;
+    img{
+        height: 3rem;
+        margin-left: 10px;
+    }
+}
+
+.jumbotron{
+    background-color: white;
+    *{
+        color: #0055CC;
+    }
+}
+
+.positive-button{
+    background-color: white;
+    color: #0055CC;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.negative-button{
+    background-color: white;
+    color: #ff0000;
+    border-color: #ff0000;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.input{
+    color: black;
+}
+
+.item{
+    color: #0055CC;
+    font-size: 1.8rem;
+}

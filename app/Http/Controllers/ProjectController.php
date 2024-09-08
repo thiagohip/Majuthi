@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
-use App\Models\ProjectType;
+use App\Models\ProjectDiscipline;
+use App\Models\Discipline;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\ProjectTypeController;
+use App\Http\Controllers\ProjectDisciplineController;
 
 
 class ProjectController extends Controller
@@ -30,8 +31,8 @@ class ProjectController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $types = $user->type;
-        return view('projects.create', compact('types'));
+        $disciplines = $user->discipline;
+        return view('projects.create', compact('disciplines'));
     }
 
     /**
@@ -39,7 +40,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $relation_controller = new ProjectTypeController;
+        $relation_controller = new ProjectDisciplineController;
 
         $project = new Project();
         $project->title = $request->input('title');
@@ -47,9 +48,9 @@ class ProjectController extends Controller
         $project->user_id = Auth::user()->id;
         $project->save();
 
-        $types = $request->input('selectedTypes');
-        foreach ($types as $type_id) {
-            $relation_controller->store($project->id, $type_id);
+        $disciplines = $request->input('selectedDisciplines');
+        foreach ($disciplines as $discipline_id) {
+            $relation_controller->store($project->id, $discipline_id);
         }
         
         return redirect("/");
@@ -60,8 +61,20 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
+        $relations = ProjectDiscipline::where('project_id', '=', $id)->get();
+        $disciplines = [];
+
+        foreach ($relations as $item) {
+
+            $discipline = Discipline::where('id', '=', $item->discipline_id)->first();
+            if($discipline){
+                array_push($disciplines, $discipline);
+            }
+        }
+
         $project = Project::find($id);
-        return view('', compact('project'));
+        $tasks = $project->task;
+        return view('projects.show', compact('project', 'tasks', 'disciplines'));
     }
 
     /**
@@ -92,12 +105,12 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        $relation_controller = new ProjectTypeController;
+        $relation_controller = new ProjectDisciplineController;
 
         $project = Project::find($id);
-        $relations = ProjectType::where('project_id', '=', $id)->get();
+        $relations = ProjectDiscipline::where('project_id', '=', $id)->get();
         foreach ($relations as $item) {
-            $relation_controller->destroy($id, $item->type_id);
+            $relation_controller->destroy($id, $item->discipline_id);
         }
         $project->delete();
         return redirect('/');

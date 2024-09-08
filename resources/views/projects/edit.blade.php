@@ -10,11 +10,11 @@
         @csrf
         <div class="mb-3">
           <label for="name" class="form-label">Título</label>
-          <input type="text" class="form-control" value="{{$data->name}}" name="name" id="name">
+          <input type="text" class="form-control input" value="{{$data->name}}" name="name" id="name">
         </div>
         <div class="mb-3">
             <label for="desc" class="form-label">Descrição</label>
-            <textarea name="desc" value="{{$data->description}}" id="desc" cols="30" rows="8" class="form-control"></textarea>
+            <textarea name="desc" value="{{$data->description}}" id="desc" cols="30" rows="8" class="form-control input"></textarea>
             <div id="descHelp" class="form-text">Descreva o seu projeto</div>
         </div>
         <button type="submit" class="btn btn-primary">Criar</button>

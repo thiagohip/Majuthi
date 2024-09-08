@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('disciplines', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('cd_type');
             $table->timestamp('updated_at');
             $table->timestamp('created_at');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('disciplines');
     }
 };

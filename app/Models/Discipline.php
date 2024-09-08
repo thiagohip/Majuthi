@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class Discipline extends Model
 {
     use HasFactory;
 
-    public function project_type(){
-        return $this->hasMany('App\Models\Type', 'project_id');
+    public function project_discipline(){
+        return $this->hasMany('App\Models\Type', 'discipline_id');
     }
 
     public function user(){

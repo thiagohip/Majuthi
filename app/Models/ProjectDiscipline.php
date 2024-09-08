@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectType extends Model
+class ProjectDiscipline extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,7 @@ class ProjectType extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
-    public function type(){
-        return $this->belongsTo('App\Models\Type');
+    public function discipline(){
+        return $this->belongsTo('App\Models\Discipline');
     }
 }
